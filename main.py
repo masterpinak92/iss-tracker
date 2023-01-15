@@ -4,13 +4,10 @@ import smtplib
 import time
 
 # Send email notification
-time_now = datetime.now()
-
-
 def send_mail(email_receiver, mail):
-    email_sender = 'masterpinak@gmail.com'
-    password = 'oolqbcjuupfnflft'
-    name = 'Pinak Mehta'
+    email_sender = 'example@gmail.com'
+    password = '****************'
+    name = 'name'
 
     connection = smtplib.SMTP(host="smtp.gmail.com", port=587)
     # connection.ehlo()
@@ -25,7 +22,7 @@ def send_mail(email_receiver, mail):
     connection.close()
 
 
-# Toronto coordinates
+# Toronto co-ordinates
 MY_LAT = 43.653225  # Your latitude
 MY_LONG = -79.383186  # Your longitude
 
@@ -65,7 +62,8 @@ def sunset_sunrise():
     data = response.json()
     sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
     sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
-
+    
+    time_now = datetime.now()
     if time_now.hour >= sunset or time_now.hour <= sunrise:
         return True
 
@@ -73,9 +71,9 @@ def sunset_sunrise():
 # Then send me an email to tell me to look up.
 while True:
 
-    # BONUS: run the code every 60 seconds.
+    # Run the code every 60 seconds.
     time.sleep(60)
     if is_iss_overhead() and sunset_sunrise():
-        email_receiver = "mehta.pinak@yahoo.com"
+        email_receiver = "example@yahoo.com"
         mail = "ISS is above you. Look up!"
         send_mail(email_receiver, mail)
