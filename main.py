@@ -3,6 +3,12 @@ from datetime import datetime
 import smtplib
 import time
 
+
+# Toronto co-ordinates
+MY_LAT = 43.653225  # Your latitude
+MY_LONG = -79.383186  # Your longitude
+
+
 # Send email notification
 def send_mail(email_receiver, mail):
     email_sender = 'example@gmail.com'
@@ -20,15 +26,9 @@ def send_mail(email_receiver, mail):
     # email confirmation
     print(f'Email sent to {name} at {email_receiver}')
     connection.close()
-
-
-# Toronto co-ordinates
-MY_LAT = 43.653225  # Your latitude
-MY_LONG = -79.383186  # Your longitude
-
+    
+    
 # If the ISS is close to my current position
-
-
 def is_iss_overhead():
     response = requests.get(url="http://api.open-notify.org/iss-now.json")
     response.raise_for_status()
@@ -48,7 +48,7 @@ def is_iss_overhead():
         return True
 
 
-# and it is currently dark
+# is it dark outside?
 def sunset_sunrise():
     parameters = {
         "lat": MY_LAT,
